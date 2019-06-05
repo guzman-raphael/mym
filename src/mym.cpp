@@ -556,6 +556,7 @@ void mexFunction(int nlhs, mxArray*plhs[], int nrhs, const mxArray*prhs[]) {
                     mexPrintf("%d connections open\n", nconn);
                 if (nconn==0) {
                     mexPrintf("No connections open\n");
+                    mexPrintf("This is Raphael\n");
                     return;
                 }
                 if ((nconn==1) && (c[0].isopen)) {
