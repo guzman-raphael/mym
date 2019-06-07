@@ -441,6 +441,46 @@ void mexFunction(int nlhs, mxArray*plhs[], int nrhs, const mxArray*prhs[]) {
         if (nrhs>=(jarg+4))
             pass = getstring(prhs[jarg+3]);
         int port = hostport(host);  // returns zero if there is no port
+        
+        //  Establish and test the connection
+        //  If this fails, then conn is still set, but isopen stays false
+        if (!(conn = mysql_init(conn)))
+            mexErrMsgTxt("Couldn\'t initialize MySQL connection object");
+        //my_bool  my_true = true;
+        // mysql_options(conn, MYSQL_OPT_RECONNECT, &my_true);
+        // char*ssl_input = "none";
+        // char*default_cipher = "DHE-RSA-AES256-SHA:AES256-SHA:AES128-SHA";
+        // int*selection = (int *)2;
+        // // enum op { SSL_MODE_REQUIRED, SSL_MODE_DISABLED } selection;
+        // // selection = SSL_MODE_REQUIRED;
+
+        // if (nrhs>=(jarg+5))
+        //     ssl_input = getstring(prhs[jarg+4]);
+
+        // if (!strcasecmp(ssl_input, "true")) {
+        //     ssl_input = "true";
+        //     mysql_options(conn, MYSQL_OPT_SSL_CIPHER, default_cipher);
+        //     mysql_options(conn, MYSQL_OPT_SSL_MODE, selection);
+        //     // mysql_options(conn, MYSQL_OPT_SSL_MODE, default_cipher);
+        //     // mysql_options(conn, MYSQL_OPT_SSL_MODE, *SSL_MODE_REQUIRED);
+        //     // mexPrintf("Hello Raphael\n");
+        // }
+        // else if (!strcasecmp(ssl_input, "false")) {
+        //     ssl_input = "false";
+        // }
+        // else {
+        //     ssl_input = "none";
+        //     mysql_options(conn, MYSQL_OPT_SSL_CIPHER, default_cipher); //Raphael MYSQL_OPT_SSL_CAPATH, "/etc/ssl/certs"
+        // }
+
+        // apt install cmake libssl-dev libncurses5-dev pkg-config
+        // mexPrintf("Hello Raphael\n");
+        // mexPrintf("this is ssl: %s\n",ssl_input);
+        // if (!strcasecmp(query, "open"))
+        //     q = OPEN;
+        // else if (!strcasecmp(query, "close"))
+        //     q = CLOSE;
+
         if (nlhs<1) {
             mexPrintf("Connecting to  host = %s", (host) ? host : "localhost");
             if (port)
@@ -449,14 +489,10 @@ void mexFunction(int nlhs, mxArray*plhs[], int nrhs, const mxArray*prhs[]) {
                 mexPrintf("  user = %s", user);
             if (pass)
                 mexPrintf("  password = %s", pass);
+            // mexPrintf("  ssl = %s", ssl_input);
             mexPrintf("\n");
         }
-        //  Establish and test the connection
-        //  If this fails, then conn is still set, but isopen stays false
-        if (!(conn = mysql_init(conn)))
-            mexErrMsgTxt("Couldn\'t initialize MySQL connection object");
-        //my_bool  my_true = true;
-        //mysql_options(conn, MYSQL_OPT_RECONNECT, &my_true);
+
         if (!mysql_real_connect(conn, host, user, pass, NULL, port, NULL, CLIENT_MULTI_STATEMENTS))
             mexErrMsgTxt(mysql_error(conn));
         const char*c = mysql_stat(conn);
@@ -556,7 +592,7 @@ void mexFunction(int nlhs, mxArray*plhs[], int nrhs, const mxArray*prhs[]) {
                     mexPrintf("%d connections open\n", nconn);
                 if (nconn==0) {
                     mexPrintf("No connections open\n");
-                    mexPrintf("This is Raphael\n");
+                    mexPrintf("This is Raphael-5.3\n");
                     return;
                 }
                 if ((nconn==1) && (c[0].isopen)) {
