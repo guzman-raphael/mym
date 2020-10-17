@@ -4,6 +4,9 @@ docker-compose.yml
 *.env
 notebook
 .vscode
-win.*
+win*
 .DS_Store
-macos.*
+macos*
+*.prj
+matlab.prf
+*.mltbx

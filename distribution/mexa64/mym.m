@@ -6,6 +6,34 @@
 %
 % If no output arguments are given, then display results. Otherwise returns
 % requested data silently.
+%
+% INSTALLATION
+% ------------
+% (Recommended) Using GHToolbox (FileExchange Community Toolbox):
+%   1. Install *GHToolbox* using using an appropriate method in
+%        https://github.com/datajoint/GHToolbox
+%   2. run: `ghtb.install('datajoint/mym')`
+%
+% Greater than R2016b:
+%   1. Utilize MATLAB built-in GUI i.e. *Top Ribbon -> Add-Ons -> Get Add-Ons*
+%   2. Search and Select `mym`
+%   3. Select *Add from GitHub*
+%
+% Less than R2016b:
+%   1. Utilize MATLAB built-in GUI i.e. *Top Ribbon -> Add-Ons -> Get Add-Ons*
+%   2. Search and Select `mym`
+%   3. Select *Download from GitHub*
+%   4. Save `mym.mltbx` locally
+%   5. Navigate in MATLAB tree browser to saved toolbox file
+%   6. Right-Click and Select *Install*
+%   7. Select *Install*
+%
+% From Source:
+%   1. Download `mym.mltbx` locally
+%   2. Navigate in MATLAB tree browser to saved toolbox file
+%   3. Right-Click and Select *Install*
+%   4. Select *Install*
+%
 % mym() or mym
 % ------------
 %   shows status of all open connections (returns nothing).
@@ -109,6 +137,10 @@
 % 'minor' and 'bugfix' is returned. These fields contain numeric
 % scalars corresponding to the version major.minor.bugfix
 %
+% SOURCE
+% ------
+% https://github.com/datajoint/mym
+%
 % HISTORY
 % -------
 % v1.36   - fixed bug for Linux64 related to cross-platform compatibility. Blobs written on windows can be read under 
@@ -139,5 +171,3 @@
 % v1.0.2  put mYm under GPL license, official release
 % v1.0.1  corrected a bug where non-matlab binary objects were not returned
 % v1.0.0  initial release
-
-
